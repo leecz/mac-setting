@@ -25,6 +25,14 @@ Plugin 'kien/ctrlp.vim'
 
 Plugin 'bling/vim-airline'
 
+Plugin 'JulesWang/css.vim'
+
+Plugin 'kchmck/vim-coffee-script'
+
+Plugin 'mileszs/ack.vim'
+
+Plugin 'ntpeters/vim-better-whitespace'
+
 call vundle#end()                " required
 filetype plugin indent on        " required
 " -EOF
@@ -41,6 +49,7 @@ set cursorcolumn                 " 光标列高亮
 set nu                           " 设置行号
 
 set expandtab		                 " 使用空格代替 tab
+set smarttab
 set softtabstop=2                " 插入模式下使用 Tab 键进行缩进的长度
 set shiftwidth=2                 " 在 normal 模式下使用 >>, << 和 Insert 模式下使用 <c-t>, <c-d> 进行缩进的长度
 set tabstop=2                    " 相当于空格的数量
@@ -54,6 +63,9 @@ set smartindent
 set grepprg=ack
 
 set laststatus=2
+
+set incsearch                    " 用于搜索
+set smartcase                    " 用于搜索，自动切换是否忽略大小写
 let mapleader = ','
 
 let g:user_emmet_leader_key=','
@@ -82,4 +94,16 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_powerline_fonts = 1
 
+let NERDChristmasTree=0
+let NERDTreeWinSize=35
+let NERDTreeChDirMode=2
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
+let NERDTreeShowBookmarks=1
+let NERDTreeWinPos="left"
 
+" Automatically open a NERDTree if no files where specified
+autocmd vimenter * if !argc() | NERDTree | endif
+" " Close vim if the only window left open is a NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" " Open a NERDTree
+nmap <F5> :NERDTreeToggle<cr>
