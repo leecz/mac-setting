@@ -33,18 +33,25 @@ Plugin 'mileszs/ack.vim'
 
 Plugin 'ntpeters/vim-better-whitespace'
 
+Plugin 'othree/yajs.vim'
+
+Plugin 'gavocanov/vim-js-indent'
+
+Plugin 'scrooloose/syntastic'
+
+Plugin 'mxw/vim-jsx'
+
 call vundle#end()                " required
 filetype plugin indent on        " required
 " -EOF
 
 
 set encoding=utf8
-       
 syntax on                        " 语法高亮
 
 
 set cursorline                   " 光标行高亮
-set cursorcolumn                 " 光标列高亮 
+set cursorcolumn                 " 光标列高亮
 
 set nu                           " 设置行号
 
@@ -55,8 +62,6 @@ set shiftwidth=2                 " 在 normal 模式下使用 >>, << 和 Insert 
 set tabstop=2                    " 相当于空格的数量
 
 set backspace=2
-
-set autoindent
 
 set smartindent
 
@@ -70,11 +75,15 @@ let mapleader = ','
 
 let g:user_emmet_leader_key=','
 
+let g:jsx_ext_required = 0
+
 colorscheme molokai
 "let g:molokai_original = 1
 "let g:rehash256 = 1
 
-" ctrop 
+let g:syntastic_javascript_checkers = ['standard']
+
+" ctrop
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
@@ -107,3 +116,13 @@ autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " " Open a NERDTree
 nmap <F5> :NERDTreeToggle<cr>
+
+"syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
